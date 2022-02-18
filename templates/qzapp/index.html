@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线相册信息管理</title>
+    <style type="text/css">
+        img{
+            width: 75px;
+            height: 75px;
+        }
+    </style>
+    <script>
+        //自定义执行信息删除提示判断，参数uu是成功的删除url地址
+            function doDel(uu){
+                if(confirm("确定要删除吗？")){
+                    //网页跳转
+                    window.location=uu;
+                }
+            }
+    </script>
+</head>
+<body>
+    {% include 'qzapp/menu.html' %}
+    <center>
+    <table cellspacing="0" border="1px" width="800px">
+        <tr>
+        <th>id号</th>
+        <th>标题</th>
+        <th>添加时间</th>
+        <th>图片</th>
+        <th>操作</th>
+        <th>操作</th>
+        <th>操作</th>
+        <th>操作</th>
+        <th>操作</th>
+        </tr>
+         {% for photo in photolist %}
+        <tr>
+<!--           <td>{{photo.qzid}}</td>-->
+            <td>{{photo.class1}}</td>
+            <td>{{photo.class2}}</td>
+            <td>{{photo.qztime}}</td>
+            <td>{{photo.qzauthor}}</td>
+            <td>{{photo.qzaddress}}</td>
+            <td>{{photo.addtime|date:'Y-m-d H:i:s'}}</td>
+            <td><img src="{{photo.filepath}}"/></td>
+            <td>
+                <a href="{% url 'editusers' photo.qzid %}">编辑</a>
+                <a href="javascript:doDel('{% url 'delusers' photo.qzid %}');">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+        </center>
+</body>
+</html>
